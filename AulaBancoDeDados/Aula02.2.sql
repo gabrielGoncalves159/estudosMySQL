@@ -1,0 +1,39 @@
+USE Aula;
+
+CREATE TABLE Alunos02 (
+	Id INT NOT NULL,
+    
+    Nome VARCHAR(150),
+    CPF CHAR(14) NOT NULL,
+    Telefone CHAR(15),
+    
+    CONSTRAINT PK_Alunos PRIMARY KEY (Id) -- Construindo uma PK
+);
+
+CREATE TABLE TurmaAlunos (
+	Id INT NOT NULL,
+    
+    Aluno INT NOT NULL,
+    
+    CONSTRAINT PK_TurmaAlunos PRIMARY KEY (Id),
+    CONSTRAINT FK_TurmaAlunos FOREIGN KEY (Aluno) REFERENCES Alunos02(Id)
+);
+
+ALTER TABLE Alunos02 MODIFY CPF INTEGER;
+ALTER TABLE TurmaAlunos ADD Nota DECIMAL(4, 2) NOT NULL;
+
+
+-- CREATE TABLE
+
+-- DROP TABLE Alunos;
+-- DROP DATABASE Alunos02;
+
+CREATE TABLE Turmas (
+	Id INT NOT NULL,
+    
+    CONSTRAINT PK_Turmas PRIMARY KEY (Id)
+);
+
+ALTER TABLE TurmaAlunos
+	ADD Turma INT NOT NULL,
+    ADD CONSTRAINT FK_TurmaAlunos_Turma FOREIGN KEY (Turma) REFERENCES Turmas(Id);
